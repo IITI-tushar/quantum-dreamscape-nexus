@@ -1,3 +1,4 @@
+
 import React, { useEffect, useRef, useState } from 'react';
 
 export const CursorShockwave = () => {
@@ -218,7 +219,8 @@ export const CursorShockwave = () => {
         />
       ))}
       
-      <style jsx>{`
+      <style>
+        {`
         .scroll-ripple {
           position: absolute;
           border-radius: 50%;
@@ -259,7 +261,8 @@ export const CursorShockwave = () => {
           opacity: 0.2;
           transition: opacity 0.5s;
         }
-      `}</style>
+        `}
+      </style>
     </div>
   );
 };
