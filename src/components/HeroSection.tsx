@@ -136,7 +136,7 @@ export function HeroSection() {
                   <div className="text-sm opacity-80 mb-1">NEONA Bot • Just now</div>
                   <div className="relative">
                     <p>Of course! Watch how these messages change colors based on your emotions. Try saying something excited or something calm to see the difference.</p>
-                    <div className="absolute -right-3 -bottom-3 h-6 w-6 rounded-full bg-ai-green flex items-center justify-center text-xs animate-pulse-neon" style={{--color: "var(--ai-green)"}}>AI</div>
+                    <div className="absolute -right-3 -bottom-3 h-6 w-6 rounded-full bg-ai-green flex items-center justify-center text-xs animate-pulse-neon" style={{color: "var(--ai-green)"}}>AI</div>
                   </div>
                 </div>
                 
