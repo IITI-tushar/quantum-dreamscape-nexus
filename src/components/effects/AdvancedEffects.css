@@ -1,0 +1,302 @@
+
+/* Quantum Cursor & Trails */
+.quantum-cursor {
+  position: fixed;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255,255,255,0.8) 0%, rgba(79,0,255,0.4) 70%, transparent 100%);
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+  mix-blend-mode: screen;
+  filter: blur(2px) drop-shadow(0 0 5px var(--quantum-blue));
+}
+
+.cursor-trail {
+  position: fixed;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9998;
+  transform: translate(-50%, -50%);
+  opacity: 0.7;
+  filter: blur(3px);
+  mix-blend-mode: screen;
+  animation: trail-fade 1s forwards;
+}
+
+.trail-fade {
+  animation: trail-fade-out 0.5s forwards;
+}
+
+@keyframes trail-fade {
+  0% { transform: translate(-50%, -50%) scale(1); }
+  100% { transform: translate(-50%, -50%) scale(0.3); opacity: 0; }
+}
+
+@keyframes trail-fade-out {
+  0% { opacity: 0.7; }
+  100% { opacity: 0; }
+}
+
+/* Black Hole Button Effect */
+.black-hole-active {
+  position: relative;
+  z-index: 50;
+  animation: pulse-strong 1.5s infinite;
+  box-shadow: 0 0 20px rgba(79, 0, 255, 0.7), 0 0 40px rgba(139, 92, 246, 0.3);
+}
+
+.black-hole-active::before {
+  content: '';
+  position: absolute;
+  inset: -20px;
+  background: radial-gradient(circle, transparent 50%, rgba(0,0,0,0.3) 80%);
+  border-radius: 50%;
+  z-index: -1;
+  pointer-events: none;
+  animation: black-hole-pulse 2s infinite;
+}
+
+.warp-background {
+  position: relative;
+}
+
+.warp-background::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background: radial-gradient(circle 400px at var(--x, 50%) var(--y, 50%), 
+              transparent 0%, 
+              rgba(79, 0, 255, 0.03) 40%, 
+              transparent 70%);
+  pointer-events: none;
+  transition: opacity 0.3s;
+  animation: warp-pulse 3s infinite;
+}
+
+@keyframes black-hole-pulse {
+  0% { transform: scale(0.95); opacity: 0.7; }
+  50% { transform: scale(1.05); opacity: 0.9; }
+  100% { transform: scale(0.95); opacity: 0.7; }
+}
+
+@keyframes warp-pulse {
+  0% { opacity: 0.7; }
+  50% { opacity: 1; }
+  100% { opacity: 0.7; }
+}
+
+@keyframes pulse-strong {
+  0% { filter: drop-shadow(0 0 8px var(--quantum-blue)) brightness(1); }
+  50% { filter: drop-shadow(0 0 20px var(--plasma-pink)) brightness(1.2); }
+  100% { filter: drop-shadow(0 0 8px var(--quantum-blue)) brightness(1); }
+}
+
+/* Holographic Fractal Text */
+.holographic-text {
+  position: relative;
+  display: inline-block;
+  perspective: 1000px;
+  transform-style: preserve-3d;
+}
+
+.holographic-text:hover span {
+  animation: float-glyph 2s ease-in-out infinite;
+  animation-delay: calc(var(--index) * 0.05s);
+  filter: drop-shadow(0 0 5px currentColor);
+}
+
+@keyframes float-glyph {
+  0%, 100% { transform: translateY(0) rotateX(0); }
+  50% { transform: translateY(-10px) rotateX(10deg); }
+}
+
+/* Data Corruption Effect */
+.glitch-text {
+  position: relative;
+  display: inline-block;
+  cursor: default;
+}
+
+.glitch-text::before,
+.glitch-text::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: all 0.2s;
+  pointer-events: none;
+}
+
+.glitch-text::before {
+  color: rgba(255, 0, 225, 0.7);
+  z-index: -1;
+}
+
+.glitch-text::after {
+  color: rgba(79, 0, 255, 0.7);
+  z-index: -2;
+}
+
+.glitch-text:hover::before {
+  opacity: 1;
+  transform: translateX(-3px);
+  animation: glitch-anim 0.3s infinite;
+}
+
+.glitch-text:hover::after {
+  opacity: 1;
+  transform: translateX(3px);
+  animation: glitch-anim 0.3s infinite reverse;
+}
+
+@keyframes glitch-anim {
+  0% { transform: translateX(-3px) skew(0.5deg); }
+  20% { transform: translateX(3px) skew(0deg); }
+  40% { transform: translateX(-2px) skew(-0.5deg); }
+  60% { transform: translateX(2px) skew(0.25deg); }
+  80% { transform: translateX(-1px) skew(0deg); }
+  100% { transform: translateX(1px) skew(0.5deg); }
+}
+
+/* Cyberspace Weather */
+.cyberspace-weather {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 100;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.weather-fade-out {
+  animation: weather-fade 3s forwards;
+}
+
+@keyframes weather-fade {
+  0% { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+/* Neon Rain */
+.neon-raindrop {
+  position: absolute;
+  top: -50px;
+  border-radius: 50% 50% 0 0;
+  transform-origin: bottom center;
+  opacity: 0.8;
+  filter: blur(1px);
+  animation: raindrop-fall linear forwards;
+}
+
+@keyframes raindrop-fall {
+  0% { transform: translateY(0) scaleY(1); }
+  70% { transform: translateY(calc(100vh + 50px)) scaleY(1); opacity: 0.8; }
+  100% { transform: translateY(calc(100vh + 50px)) scaleY(0.1); opacity: 0; }
+}
+
+.neon-ripple {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: 2px solid rgba(79, 0, 255, 0.7);
+  transform: translate(-50%, -50%);
+  animation: ripple-expand 1s forwards;
+}
+
+@keyframes ripple-expand {
+  0% { width: 10px; height: 10px; opacity: 0.8; }
+  100% { width: 100px; height: 100px; opacity: 0; }
+}
+
+/* Emoji Meteor Shower */
+.emoji-meteor-container {
+  pointer-events: auto;
+  cursor: crosshair;
+}
+
+.emoji-meteor {
+  position: absolute;
+  font-size: 24px;
+  filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.8));
+  animation: meteor-fall 5s cubic-bezier(0.4, 0.1, 0.7, 0.95) forwards;
+  transform-origin: center;
+}
+
+@keyframes meteor-fall {
+  0% {
+    transform: translate(0, 0) rotate(0deg) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(calc(100px * var(--direction, 1)), calc(100vh + 100px)) rotate(45deg) scale(0.5);
+    opacity: 0;
+  }
+}
+
+.emoji-meteor-shot {
+  animation: meteor-shot 0.5s cubic-bezier(0.5, 0, 0.75, 0) forwards !important;
+}
+
+@keyframes meteor-shot {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  30% {
+    transform: scale(1.5);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(0);
+    opacity: 0;
+  }
+}
+
+/* 3D Text Portal Effect */
+.text-portal {
+  position: relative;
+  transform-style: preserve-3d;
+  perspective: 1000px;
+}
+
+.text-portal-active {
+  animation: portal-spin 5s infinite linear;
+}
+
+@keyframes portal-spin {
+  0% { transform: rotateY(0deg); }
+  100% { transform: rotateY(360deg); }
+}
+
+/* Semantic Particle Burst */
+.particle {
+  position: absolute;
+  pointer-events: none;
+  animation: particle-float 1s ease-out forwards;
+  z-index: 1000;
+}
+
+@keyframes particle-float {
+  0% {
+    transform: translate(0, 0) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(
+      calc(var(--x) * 100px),
+      calc(var(--y) * 100px)
+    ) scale(0);
+    opacity: 0;
+  }
+}

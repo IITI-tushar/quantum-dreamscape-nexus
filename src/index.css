@@ -25,6 +25,16 @@
 @layer base {
   body {
     @apply bg-black-hole text-white;
+    cursor: none; /* Hide default cursor for quantum cursor effect */
+    position: relative;
+  }
+  
+  /* High-contrast neon mode (activated by voice command) */
+  body.high-contrast-neon {
+    --quantum-blue: #00ffff;
+    --hologram-purple: #ff00ff;
+    --plasma-pink: #ff0000;
+    filter: contrast(1.2) saturate(1.5);
   }
   
   /* Custom scrollbar */

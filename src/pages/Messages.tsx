@@ -7,14 +7,15 @@ import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { MessageSquare, Send, Mic, Smile, PlusCircle, Image } from 'lucide-react';
-import MessageBubble from '../components/chat/MessageBubble';
+import EnhancedMessageBubble from '../components/chat/EnhancedMessageBubble';
 import ChatAvatar from '../components/chat/ChatAvatar';
+import { useAdvancedEffects, HolographicText } from '../hooks/use-advanced-effects';
 
 // Sample messages for demo
 const initialMessages = [
-  { id: 1, sender: 'NEONA', avatar: 'https://i.pravatar.cc/150?img=32', message: 'Welcome to NeonChat! How can I assist you today?', sentiment: 'neutral', timestamp: new Date().toISOString() },
-  { id: 2, sender: 'User', avatar: 'https://i.pravatar.cc/150?img=13', message: 'I\'m looking for some chat features.', sentiment: 'curious', timestamp: new Date(Date.now() - 60000).toISOString() },
-  { id: 3, sender: 'NEONA', avatar: 'https://i.pravatar.cc/150?img=32', message: 'Try our new DNA Splice hover effect and anti-gravity pulse animations!', sentiment: 'excited', timestamp: new Date(Date.now() - 120000).toISOString() },
+  { id: 1, sender: 'NEONA', avatar: 'https://i.pravatar.cc/150?img=32', message: 'Welcome to NeonChat 3.0! Hover over elements to experience HYPERKINETIC UI.', sentiment: 'neutral', timestamp: new Date().toISOString() },
+  { id: 2, sender: 'User', avatar: 'https://i.pravatar.cc/150?img=13', message: 'Trying out these new animations!', sentiment: 'curious', timestamp: new Date(Date.now() - 60000).toISOString() },
+  { id: 3, sender: 'NEONA', avatar: 'https://i.pravatar.cc/150?img=32', message: 'Double-click any message to see the 3D Text Portal. Select text for Semantic Particle Burst!', sentiment: 'excited', timestamp: new Date(Date.now() - 120000).toISOString() },
 ];
 
 // Contact list for the sidebar
@@ -27,6 +28,9 @@ const contacts = [
 ];
 
 const Messages = () => {
+  // Initialize advanced effects
+  useAdvancedEffects();
+  
   const [messages, setMessages] = useState(initialMessages);
   const [newMessage, setNewMessage] = useState('');
   const [selectedContact, setSelectedContact] = useState(contacts[0]);
@@ -35,7 +39,7 @@ const Messages = () => {
   const { toast } = useToast();
   
   const messagesEndRef = React.useRef<HTMLDivElement>(null);
-
+  
   useEffect(() => {
     // Scroll to bottom when messages change
     if (messagesEndRef.current) {
@@ -123,7 +127,9 @@ const Messages = () => {
         {/* Contact Sidebar */}
         <div className="w-80 bg-black-hole border-r border-quantum-blue/20 flex flex-col">
           <div className="p-4 border-b border-quantum-blue/20">
-            <h2 className="text-lg font-bold text-white mb-4">Connections</h2>
+            <h2 className="text-lg font-bold text-white mb-4">
+              <HolographicText>Neural Network</HolographicText>
+            </h2>
             <div className="relative">
               <Input 
                 placeholder="Search contacts..." 
@@ -183,7 +189,7 @@ const Messages = () => {
               
               <div>
                 <h3 className="font-bold text-white">
-                  {selectedContact.name} {selectedContact.isAI && <span className="text-xs ml-1 text-ai-green">AI</span>}
+                  <HolographicText>{selectedContact.name}</HolographicText> {selectedContact.isAI && <span className="text-xs ml-1 text-ai-green">AI</span>}
                 </h3>
                 <p className="text-xs text-gray-400">{selectedContact.status === 'online' ? 'Online' : selectedContact.status}</p>
               </div>
@@ -212,7 +218,7 @@ const Messages = () => {
                     />
                   )}
                   
-                  <MessageBubble 
+                  <EnhancedMessageBubble 
                     message={msg.message} 
                     sender={msg.sender} 
                     sentiment={msg.sentiment}

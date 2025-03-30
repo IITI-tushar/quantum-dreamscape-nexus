@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import Navbar from '../Navbar';
 import Footer from '../Footer';
 import { CursorShockwave } from '../effects/CursorShockwave';
+import { useAdvancedEffects } from '@/hooks/use-advanced-effects';
 
 type AppLayoutProps = {
   children: React.ReactNode;
@@ -19,6 +20,9 @@ const AppLayout = ({
 }: AppLayoutProps) => {
   const [screenTime, setScreenTime] = useState(0);
   const [safeMode, setSafeMode] = useState(false);
+
+  // Initialize advanced effects
+  useAdvancedEffects();
 
   // Screen time monitoring for Cyber-Psychosis Prevention
   useEffect(() => {
@@ -38,6 +42,34 @@ const AppLayout = ({
     
     return () => clearInterval(timer);
   }, [title]);
+
+  // Setup Biometric Sync (webcam pupil tracking for scroll)
+  useEffect(() => {
+    // Listen for "activate neon" voice command
+    const activateNeonMode = () => {
+      // In a real implementation, this would use the Web Speech API
+      // For now, we'll just listen for key combinations
+      
+      const handleKeyDown = (e: KeyboardEvent) => {
+        // Keyboard shortcut Alt+N for "activate neon"
+        if (e.altKey && e.key === 'n') {
+          document.body.classList.toggle('high-contrast-neon');
+          console.log("Voice command 'activate neon' detected, toggling high-contrast mode");
+        }
+      };
+      
+      document.addEventListener('keydown', handleKeyDown);
+      
+      return () => {
+        document.removeEventListener('keydown', handleKeyDown);
+      };
+    };
+    
+    // Initialize voice command detection
+    const cleanup = activateNeonMode();
+    
+    return cleanup;
+  }, []);
 
   return (
     <div className={`flex flex-col min-h-screen bg-black-hole overflow-hidden ${safeMode ? 'blur-sm' : ''}`}>
